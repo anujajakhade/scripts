@@ -95,8 +95,8 @@ function configureAndInstall() {
                 wget https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u202-b08_openj9-0.12.1/OpenJDK8U-jdk_s390x_linux_openj9_8u202b08_openj9-0.12.1.tar.gz
                 tar -xvf OpenJDK8U-jdk_s390x_linux_openj9_8u202b08_openj9-0.12.1.tar.gz
                 printf -- "install AdoptOpenJDK 8 (With Hotspot) success\n" >> "$LOG_FILE"
-                echo export JAVA_HOME=$CURDIR/jdk8u202-b08/ >> ~/.bashrc
-                echo export PATH=$JAVA_HOME/bin:$PATH >> ~/.bashrc
+                export JAVA_HOME=$CURDIR/jdk8u202-b08/ 
+                export PATH=$JAVA_HOME/bin:$PATH 
                 printf -- 'export JAVA_HOME for "$ID"  \n'  >> "$LOG_FILE"
 
                 #Build LevelDB JNI
@@ -112,11 +112,11 @@ function configureAndInstall() {
                 cd "$CURDIR"
                 git clone -b s390x https://github.com/linux-on-ibm-z/leveldb.git
                 git clone -b leveldbjni-1.8-s390x https://github.com/linux-on-ibm-z/leveldbjni.git
-                echo export LEVELDB_HOME=`pwd`/leveldb >> ~/.bashrc
-                echo export LEVELDBJNI_HOME=`pwd`/leveldbjni >> ~/.bashrc
-                echo export LIBRARY_PATH=${SNAPPY_HOME} >> ~/.bashrc
-                echo export C_INCLUDE_PATH=${LIBRARY_PATH} >> ~/.bashrc
-                echo export CPLUS_INCLUDE_PATH=${LIBRARY_PATH} >> ~/.bashrc
+                export LEVELDB_HOME=`pwd`/leveldb 
+                export LEVELDBJNI_HOME=`pwd`/leveldbjni 
+                export LIBRARY_PATH=${SNAPPY_HOME} 
+                export C_INCLUDE_PATH=${LIBRARY_PATH}
+                export CPLUS_INCLUDE_PATH=${LIBRARY_PATH} 
                 cd ${LEVELDB_HOME}
                 git apply ${LEVELDBJNI_HOME}/leveldb.patch
                 make libleveldb.a
@@ -152,8 +152,8 @@ function configureAndInstall() {
                 cd zstd-jni
                 git checkout v1.3.8-2
                 sbt compile test package
-                export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/$CURDIR/zstd-jni/target/classes/linux/s390x/ >> ~/.bashrc
-                export MAVEN_OPTS="-Xmx2g -XX:ReservedCodeCacheSize=512m" >> ~/.bashrc
+                export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/$CURDIR/zstd-jni/target/classes/linux/s390x/
+                export MAVEN_OPTS="-Xmx2g -XX:ReservedCodeCacheSize=512m" 
                 ulimit -s unlimited
                 ulimit -n 999999
 
