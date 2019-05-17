@@ -95,8 +95,8 @@ function configureAndInstall() {
                 wget https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u202-b08_openj9-0.12.1/OpenJDK8U-jdk_s390x_linux_openj9_8u202b08_openj9-0.12.1.tar.gz
                 tar -xvf OpenJDK8U-jdk_s390x_linux_openj9_8u202b08_openj9-0.12.1.tar.gz
                 printf -- "install AdoptOpenJDK 8 (With Hotspot) success\n" >> "$LOG_FILE"
-                export JAVA_HOME=$CURDIR/jdk8u202-b08/ >> ~/.bashrc
-                export PATH=$JAVA_HOME/bin:$PATH >> ~/.bashrc
+                echo export JAVA_HOME=$CURDIR/jdk8u202-b08/ >> ~/.bashrc
+                echo export PATH=$JAVA_HOME/bin:$PATH >> ~/.bashrc
                 printf -- 'export JAVA_HOME for "$ID"  \n'  >> "$LOG_FILE"
 
                 #Build LevelDB JNI
@@ -104,18 +104,18 @@ function configureAndInstall() {
                 cd "$CURDIR"
                 wget https://github.com/google/snappy/releases/download/1.1.3/snappy-1.1.3.tar.gz
                 tar -zxvf  snappy-1.1.3.tar.gz
-                export SNAPPY_HOME=`pwd`/snappy-1.1.3
+                echo export SNAPPY_HOME=`pwd`/snappy-1.1.3
                 cd ${SNAPPY_HOME}
                 ./configure --disable-shared --with-pic
                 make
                 cd "$CURDIR"
                 git clone -b s390x https://github.com/linux-on-ibm-z/leveldb.git
                 git clone -b leveldbjni-1.8-s390x https://github.com/linux-on-ibm-z/leveldbjni.git
-                export LEVELDB_HOME=`pwd`/leveldb >> ~/.bashrc
-                export LEVELDBJNI_HOME=`pwd`/leveldbjni >> ~/.bashrc
-                export LIBRARY_PATH=${SNAPPY_HOME} >> ~/.bashrc
-                export C_INCLUDE_PATH=${LIBRARY_PATH} >> ~/.bashrc
-                export CPLUS_INCLUDE_PATH=${LIBRARY_PATH} >> ~/.bashrc
+                echo export LEVELDB_HOME=`pwd`/leveldb >> ~/.bashrc
+                echo export LEVELDBJNI_HOME=`pwd`/leveldbjni >> ~/.bashrc
+                echo export LIBRARY_PATH=${SNAPPY_HOME} >> ~/.bashrc
+                echo export C_INCLUDE_PATH=${LIBRARY_PATH} >> ~/.bashrc
+                echo export CPLUS_INCLUDE_PATH=${LIBRARY_PATH} >> ~/.bashrc
                 cd ${LEVELDB_HOME}
                 git apply ${LEVELDBJNI_HOME}/leveldb.patch
                 make libleveldb.a
