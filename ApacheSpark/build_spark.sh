@@ -136,7 +136,7 @@ function configureAndInstall() {
                 cd "$CURDIR"
                 wget https://piccolo.link/sbt-1.2.8.zip
                 unzip sbt-1.2.8.zip
-                export PATH=$PATH:$SOURCE_ROOT/sbt/bin/
+                export PATH=$PATH:$CURDIR/sbt/bin/
                 fi
 
                 if [[ "$ID" == "ubuntu" ]]; then
