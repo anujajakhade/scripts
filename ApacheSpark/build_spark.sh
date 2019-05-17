@@ -87,7 +87,7 @@ function configureAndInstall() {
         cd "$CURDIR"
         wget http://mirrors.estointernet.in/apache/maven/maven-3/3.6.1/binaries/apache-maven-3.6.1-bin.tar.gz
         tar -xvf apache-maven-3.6.1-bin.tar.gz
-        echo export PATH=$PATH:$CURDIR/apache-maven-3.6.1/bin >> ~/.bashrc
+        export PATH=$PATH:$CURDIR/apache-maven-3.6.1/bin
     fi
 
     # Install AdoptOpenJDK 8 (With Hotspot)
