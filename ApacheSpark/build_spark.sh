@@ -87,7 +87,7 @@ function configureAndInstall() {
         cd "$CURDIR"
         wget http://mirrors.estointernet.in/apache/maven/maven-3/3.6.1/binaries/apache-maven-3.6.1-bin.tar.gz
         tar -xvf apache-maven-3.6.1-bin.tar.gz
-        export PATH=$PATH:$CURDIR/apache-maven-3.6.1/bin >> ~/.bashrc
+        echo export PATH=$PATH:$CURDIR/apache-maven-3.6.1/bin >> ~/.bashrc
     fi
 
     # Install AdoptOpenJDK 8 (With Hotspot)
@@ -104,7 +104,7 @@ function configureAndInstall() {
                 cd "$CURDIR"
                 wget https://github.com/google/snappy/releases/download/1.1.3/snappy-1.1.3.tar.gz
                 tar -zxvf  snappy-1.1.3.tar.gz
-                echo export SNAPPY_HOME=`pwd`/snappy-1.1.3
+                echo export SNAPPY_HOME=`pwd`/snappy-1.1.3 >> ~/.bashrc
                 cd ${SNAPPY_HOME}
                 ./configure --disable-shared --with-pic
                 make
