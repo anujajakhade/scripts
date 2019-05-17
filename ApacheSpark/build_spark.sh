@@ -1,5 +1,5 @@
 #!/bin/bash
-# Â© Copyright IBM Corporation 2019.
+# ÃÂ© Copyright IBM Corporation 2019.
 # LICENSE: Apache License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0)
 #
 # Instructions:
@@ -83,7 +83,14 @@ function configureAndInstall() {
     # Install Ant
     cd "$CURDIR"
 
-        # Install AdoptOpenJDK 8 (With Hotspot)
+    if [[ "$ID" == "sles" ]]; then
+        cd $SOURCE_ROOT
+        wget http://mirrors.estointernet.in/apache/maven/maven-3/3.6.1/binaries/apache-maven-3.6.1-bin.tar.gz
+        tar -xvf apache-maven-3.6.1-bin.tar.gz
+        export PATH=$PATH:$SOURCE_ROOT/apache-maven-3.6.1/bin >> ~/.bashrc
+    fi
+
+    # Install AdoptOpenJDK 8 (With Hotspot)
                 cd "$CURDIR"
                 wget https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u202-b08_openj9-0.12.1/OpenJDK8U-jdk_s390x_linux_openj9_8u202b08_openj9-0.12.1.tar.gz
                 tar -xvf OpenJDK8U-jdk_s390x_linux_openj9_8u202b08_openj9-0.12.1.tar.gz
@@ -119,16 +126,32 @@ function configureAndInstall() {
 
                 #Build ZSTD JNI
 
+
+                if [[ "$ID" == "rhel" ]]; then
+                curl https://bintray.com/sbt/rpm/rpm | sudo tee /etc/yum.repos.d/bintray-sbt-rpm.repo
+                sudo yum install -y sbt
+                fi
+
+                if [[ "$ID" == "sles" ]]; then
+                cd "$CURDIR"
+                wget https://piccolo.link/sbt-1.2.8.zip
+                unzip sbt-1.2.8.zip
+                export PATH=$PATH:$SOURCE_ROOT/sbt/bin/
+                fi
+
+                if [[ "$ID" == "ubuntu" ]]; then
                 echo "deb https://dl.bintray.com/sbt/debian /" | sudo tee -a /etc/apt/sources.list.d/sbt.list
                 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 2EE0EA64E40A89B84B2DF73499E82A75642AC823
                 sudo apt-get update
                 sudo apt-get install sbt
+                fi
+
                 cd "$CURDIR"
                 git clone https://github.com/luben/zstd-jni.git
                 cd zstd-jni
                 git checkout v1.3.8-2
                 sbt compile test package
-                export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/$CURDIR/zstd-jni/target/classes/linux/s390x/ >> ~/.bashrc 
+                export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/$CURDIR/zstd-jni/target/classes/linux/s390x/ >> ~/.bashrc
                 export MAVEN_OPTS="-Xmx2g -XX:ReservedCodeCacheSize=512m" >> ~/.bashrc
                 ulimit -s unlimited
                 ulimit -n 999999
