@@ -90,7 +90,7 @@ function configureAndInstall() {
 		printf -- "install AdoptOpenJDK 8 (With Hotspot) success\n" >> "$LOG_FILE"
 		export JAVA_HOME=$CURDIR/jdk8u202-b08/
 		printf -- 'export JAVA_HOME for "$ID"  \n'  >> "$LOG_FILE"		 
-    fi
+
 
 		#Build LevelDB JNI
   
