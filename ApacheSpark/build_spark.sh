@@ -108,7 +108,7 @@ function configureAndInstall() {
                 cd ${SNAPPY_HOME}
                 ./configure --disable-shared --with-pic
                 make
-                export SNAPPY_HOME=`pwd`/snappy-1.1.3 
+                
                 cd "$CURDIR"
                 git clone -b s390x https://github.com/linux-on-ibm-z/leveldb.git
                 git clone -b leveldbjni-1.8-s390x https://github.com/linux-on-ibm-z/leveldbjni.git
