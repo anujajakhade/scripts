@@ -220,15 +220,9 @@ mv sql/hive/src/test/scala/org/apache/spark/sql/hive/orc/OrcReadBenchmark.scala 
 cd $HOME
 cat << EOF > setenv.sh
 #SPARK ENV
-export PATH=$PATH:CURDIR/apache-maven-3.6.1/bin
-export JAVA_HOME=CURDIR/jdk8u202-b08/
+export PATH=$PATH:$CURDIR/apache-maven-3.6.1/bin
+export JAVA_HOME=$CURDIR/jdk8u202-b08/
 export PATH=$JAVA_HOME/bin:$PATH
-export SNAPPY_HOME=`CURDIR`/snappy-1.1.3
-export LEVELDB_HOME=`CURDIR`/leveldb
-export LEVELDBJNI_HOME=`CURDIR`/leveldbjni
-export LIBRARY_PATH=${SNAPPY_HOME}
-export C_INCLUDE_PATH=${LIBRARY_PATH}
-export CPLUS_INCLUDE_PATH=${LIBRARY_PATH}
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CURDIR/leveldbjni/META-INF/native/linux64/s390x
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/$CURDIR/zstd-jni/target/classes/linux/s390x/
 EOF
