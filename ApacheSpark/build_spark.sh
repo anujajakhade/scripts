@@ -293,7 +293,8 @@ function gettingStarted() {
     printf -- "Run following commands to get started: \n"
 
     printf -- "./spark/bin/spark-shell \n\n"
-    printf -- "Note: Environmental Variable needed have already been added to .bashrc\n"
+    printf -- "Note: Environmental Variable needed have already been added to $HOME/setenv.sh\n"
+    printf -- "Note: To set the Environmental Variable needed for Spark, please run `source $HOME/setenv.sh` \n"
     printf -- "For more help visit https://spark.apache.org/docs/latest/spark-standalone.html"
     printf -- '**********************************************************************************************************\n'
 }
