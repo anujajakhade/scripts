@@ -238,10 +238,10 @@ EOF
 function runTest() {
         set +e
         if [[ "$TESTS" == "true" ]]; then
-                printf -- "TEST Flag is set, continue with running test \n"  >> "$LOG_FILE"
-                cd "$CURDIR/spark"
+        printf -- "TEST Flag is set, continue with running test \n"  >> "$LOG_FILE"
+        cd "$CURDIR/spark"
         ./build/mvn test -DwildcardSuites=none -fn
-                ./build/mvn -Dtest=none test -fn
+        ./build/mvn -Dtest=none test -fn
         printf -- "Tests completed. \n"
         fi
         set -e
@@ -313,14 +313,14 @@ case "$DISTRO" in
     "rhel-7.4" | "rhel-7.5" | "rhel-7.6")
         printf -- "Installing %s %s for %s \n" "$PACKAGE_NAME" "$PACKAGE_VERSION" "$DISTRO" |& tee -a "$LOG_FILE"
         printf -- "Installing dependencies... it may take some time.\n"
-        sudo yum groupinstall 'Development Tools'  |& tee -a "$LOG_FILE"
-        sudo yum install -y wget tar git libtool autoconf maven make patch curl  |& tee -a "$LOG_FILE"
+        sudo yum groupinstall -y 'Development Tools'  |& tee -a "$LOG_FILE"
+        sudo yum install -y maven wget tar git libtool autoconf make patch curl  |& tee -a "$LOG_FILE"
         configureAndInstall |& tee -a "$LOG_FILE"
         ;;
     "sles-12.4" | "sles-15")
         printf -- "Installing %s %s for %s \n" "$PACKAGE_NAME" "$PACKAGE_VERSION" "$DISTRO" |& tee -a "$LOG_FILE"
         printf -- "Installing dependencies... it may take some time.\n"
-        sudo zypper install -y wget tar git libtool autoconf gcc make  gcc-c++ zip unzip patch curl |& tee -a "$LOG_FILE"
+        sudo zypper install -y patch curl wget tar git libtool autoconf gcc make  gcc-c++ zip unzip |& tee -a "$LOG_FILE"
         configureAndInstall |& tee -a "$LOG_FILE"
         ;;
 
